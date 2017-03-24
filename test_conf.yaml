@@ -1,0 +1,35 @@
+
+---
+
+mount_point: <required>
+
+
+logs:
+  - name: mongodb
+    file: mongodb.log.*
+    owner: mongodb
+    properties: # arbitrary fields attached to messages
+      app_name: mongodb
+
+  - name: user
+    file: user.log.*
+    uid: 1000
+    properties: 
+      app_name: user_log
+
+# filters
+
+
+transports:
+  - options: # default transport output is custom zmq-based system
+      host: 127.0.0.1
+      port: 6014
+
+  - output: syslog
+    name: backup
+    options:
+      host: 10.0.2.2
+      port: 6014
+
+  
+
